@@ -9,7 +9,9 @@ public enum WeightUnit {
      * Values
      */
     KILOGRAM("KILOGRAM"),
-    POUND("POUND");
+    GRAM("GRAM"),
+    POUND("POUND"),
+    OUNCE("OUNCE");
 
     /**
      * Enum value
