@@ -28,12 +28,16 @@ public abstract class AbstractEntity implements Serializable {
     /**
      * Creation time
      */
+    @Basic(optional = false)
+    @Column(name = "creation_time")
     private Date creationTime;
     public static final String CREATION_TIME = "creationTime";
 
     /**
      * Modification time
      */
+    @Basic(optional = false)
+    @Column(name = "modification_time")
     private Date modificationTime;
     public static final String MODIFICATION_TIME = "modificationTime";
 
@@ -47,7 +51,6 @@ public abstract class AbstractEntity implements Serializable {
 
     /**
      * Get creation time
-     *
      * @return Creation time
      */
     public Date getCreationTime() {
@@ -56,7 +59,6 @@ public abstract class AbstractEntity implements Serializable {
 
     /**
      * Set creation time
-     *
      * @param creationTime Creation time
      */
     public void setCreationTime(Date creationTime) {
@@ -65,7 +67,6 @@ public abstract class AbstractEntity implements Serializable {
 
     /**
      * Get modification time
-     *
      * @return Modification time
      */
     public Date getModificationTime() {
@@ -74,7 +75,6 @@ public abstract class AbstractEntity implements Serializable {
 
     /**
      * Set modification time
-     *
      * @param modificationTime Modification time
      */
     public void setModificationTime(Date modificationTime) {
