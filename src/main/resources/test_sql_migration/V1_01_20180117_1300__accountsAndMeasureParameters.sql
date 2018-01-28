@@ -10,5 +10,17 @@ CREATE TABLE MEASURE_PARAMETERS(
   uuid CHARACTER VARYING(36) NOT NULL PRIMARY KEY,
   creation_time TIMESTAMP NOT NULL,
   modification_time TIMESTAMP NOT NULL,
-  account_uuid CHARACTER VARYING(36) NOT NULL REFERENCES ACCOUNTS(uuid) ON DELETE RESTRICT
+  account_uuid CHARACTER VARYING(36) NOT NULL REFERENCES ACCOUNTS(uuid) ON DELETE RESTRICT,
+  weight_value REAL,
+  record_date DATE NOT NULL
+);
+
+INSERT INTO ACCOUNTS(uuid, creation_time, modification_time, length_unit, weight_unit) VALUES (
+  '4a9b636e-f065-11e6-9dac-836adef2f111', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP,
+  'METER', 'KILOGRAM'
+);
+
+INSERT INTO MEASURE_PARAMETERS(uuid, creation_time, modification_time, account_uuid, weight_value, record_date) VALUES (
+  '4a9b636e-f065-11e6-9dac-836adef2f3a6', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP,
+  '4a9b636e-f065-11e6-9dac-836adef2f111', 105.0, '2017-01-28'
 );
