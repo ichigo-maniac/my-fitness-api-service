@@ -1,5 +1,6 @@
 package com.my.fitness.services.impl;
 
+import com.my.fitness.entities.AccountEntity;
 import com.my.fitness.entities.MeasureParametersEntity;
 import com.my.fitness.repositories.MeasureParametersRepository;
 import com.my.fitness.services.MeasureParametersService;
@@ -21,12 +22,46 @@ public class MeasureParametersServiceImpl implements MeasureParametersService {
     private MeasureParametersRepository measureParametersRepository;
 
     /**
-     * Get measure parameters by date
-     * @param date Record date
+     * Get measure parameters by date and account UUID
+     * @param recordDate  Record date
+     * @param accountUuid Account UUID
      * @return Measure parameters or null
      */
     @Override
-    public MeasureParametersEntity getMeasureParametersByDate(Date date) {
-        return measureParametersRepository.getMeasureParametersByDate(date);
+    public MeasureParametersEntity getMeasureParametersByDateAndAccountUUID(Date recordDate, String accountUuid) {
+        return measureParametersRepository.getMeasureParametersByDateAndAccountUUID(recordDate, accountUuid);
+    }
+
+    /**
+     * Get measure parameters by date and account
+     * @param recordDate Record date
+     * @param account    Account
+     * @return Measure parameters or null
+     */
+    @Override
+    public MeasureParametersEntity getMeasureParametersByDateAndAccount(Date recordDate, AccountEntity account) {
+        return measureParametersRepository.getMeasureParametersByDateAndAccount(recordDate, account);
+    }
+
+    /**
+     * Check - are measure parameters existing
+     * @param recordDate  Record date
+     * @param accountUuid Account uuid
+     * @return Check result
+     */
+    @Override
+    public boolean existMeasureParameters(Date recordDate, String accountUuid) {
+        return measureParametersRepository.getMeasureParametersCountByDateAndAccountUUID(recordDate, accountUuid) > 0;
+    }
+
+    /**
+     * Check - are measure parameters existing
+     * @param recordDate Record date
+     * @param account    Account
+     * @return Check result
+     */
+    @Override
+    public boolean existMeasureParameters(Date recordDate, AccountEntity account) {
+        return measureParametersRepository.getMeasureParametersCountByDateAndAccount(recordDate, account) > 0;
     }
 }
