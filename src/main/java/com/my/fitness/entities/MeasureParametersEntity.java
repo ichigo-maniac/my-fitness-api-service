@@ -1,5 +1,6 @@
 package com.my.fitness.entities;
 
+import com.my.fitness.enums.WeightUnit;
 import javax.persistence.*;
 import java.util.Date;
 
@@ -39,6 +40,15 @@ public class MeasureParametersEntity extends AbstractEntity {
     @Column(name = "weight_value")
     private Double weightValue;
     public static final String WEIGHT_VALUE = "weightValue";
+
+    /**
+     * Weight unit
+     */
+    @Basic(optional = false)
+    @Enumerated(EnumType.STRING)
+    @Column(name = "weight_unit")
+    private WeightUnit weightUnit;
+    public static final String WEIGHT_UNIT = "weightUnit";
 
     /**
      * Get record date
@@ -86,6 +96,22 @@ public class MeasureParametersEntity extends AbstractEntity {
      */
     public void setWeightValue(Double weightValue) {
         this.weightValue = weightValue;
+    }
+
+    /**
+     * Get weight unit
+     * @return Weight unit
+     */
+    public WeightUnit getWeightUnit() {
+        return weightUnit;
+    }
+
+    /**
+     * Set weight unit
+     * @param weightUnit Weight unit
+     */
+    public void setWeightUnit(WeightUnit weightUnit) {
+        this.weightUnit = weightUnit;
     }
 
 
