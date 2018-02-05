@@ -1,23 +1,27 @@
 package com.my.fitness;
 
-import com.my.fitness.configuration.TestDatabaseConnectionConfiguration;
-import com.my.fitness.constants.MyFitnessApplicationConstants;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.junit4.SpringRunner;
 
-@RunWith(SpringRunner.class)
-@ContextConfiguration(classes = {TestDatabaseConnectionConfiguration.class})
+/**
+ * My fitness API application abstract test
+ */
+@RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
-@ActiveProfiles(MyFitnessApplicationConstants.PROFILES.TEST_PROFILE)
-public class MyFitnessAppApiServiceApplicationTests extends Assert {
-
-	@Test
-	public void contextLoads() {
-	}
+@DataJpaTest
+@EnableAutoConfiguration
+@TestPropertySource(locations="classpath:application-test.properties")
+@ComponentScan("com.my.fitness")
+public abstract class MyFitnessAppApiServiceApplicationTests extends Assert {
 
 }
