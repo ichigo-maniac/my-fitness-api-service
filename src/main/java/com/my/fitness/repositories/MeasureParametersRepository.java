@@ -4,6 +4,7 @@ import com.my.fitness.entities.AccountEntity;
 import com.my.fitness.entities.MeasureParametersEntity;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 
 import java.util.Date;
 
@@ -22,7 +23,8 @@ public interface MeasureParametersRepository extends CrudRepository<MeasureParam
     @Query("SELECT record FROM " + MeasureParametersEntity.ENTITY_NAME + " as record " +
             "WHERE record." + MeasureParametersEntity.RECORD_DATE + " = :recordDate " +
             "AND record." + MeasureParametersEntity.ACCOUNT + "." + AccountEntity.UUID + " = :accountUuid")
-    MeasureParametersEntity getMeasureParametersByDateAndAccountUUID(Date recordDate, String accountUuid);
+    MeasureParametersEntity getMeasureParametersByDateAndAccountUUID(@Param("recordDate") Date recordDate,
+                                                                     @Param("accountUuid") String accountUuid);
 
     /**
      * Get measure parameters by date and account
@@ -33,7 +35,8 @@ public interface MeasureParametersRepository extends CrudRepository<MeasureParam
     @Query("SELECT record FROM " + MeasureParametersEntity.ENTITY_NAME + " as record " +
             "WHERE record." + MeasureParametersEntity.RECORD_DATE + " = :recordDate " +
             "AND record." + MeasureParametersEntity.ACCOUNT + " = :account")
-    MeasureParametersEntity getMeasureParametersByDateAndAccount(Date recordDate, AccountEntity account);
+    MeasureParametersEntity getMeasureParametersByDateAndAccount(@Param("recordDate") Date recordDate,
+                                                                 @Param("account") AccountEntity account);
 
     /**
      * Get measure parameters count by date and account UUID
@@ -44,7 +47,8 @@ public interface MeasureParametersRepository extends CrudRepository<MeasureParam
     @Query("SELECT COUNT(record) FROM " + MeasureParametersEntity.ENTITY_NAME + " as record " +
             "WHERE record." + MeasureParametersEntity.RECORD_DATE + " = :recordDate " +
             "AND record." + MeasureParametersEntity.ACCOUNT + "." + AccountEntity.UUID + " = :accountUuid")
-    Long getMeasureParametersCountByDateAndAccountUUID(Date recordDate, String accountUuid);
+    Long getMeasureParametersCountByDateAndAccountUUID(@Param("recordDate") Date recordDate,
+                                                       @Param("accountUuid") String accountUuid);
 
     /**
      * Get measure parameters count by date and account
@@ -55,6 +59,7 @@ public interface MeasureParametersRepository extends CrudRepository<MeasureParam
     @Query("SELECT COUNT(record) FROM " + MeasureParametersEntity.ENTITY_NAME + " as record " +
             "WHERE record." + MeasureParametersEntity.RECORD_DATE + " = :recordDate " +
             "AND record." + MeasureParametersEntity.ACCOUNT + " = :account")
-    Long getMeasureParametersCountByDateAndAccount(Date recordDate, AccountEntity account);
+    Long getMeasureParametersCountByDateAndAccount(@Param("recordDate") Date recordDate,
+                                                   @Param("account") AccountEntity account);
 
 }
