@@ -42,4 +42,22 @@ public interface MeasureParametersService {
      */
     boolean existMeasureParameters(Date recordDate, AccountEntity account);
 
+    /**
+     * Check - are measure parameters existing except one measure parameters entity
+     * @param recordDate Record date
+     * @param accountUuid Account uuid
+     * @param measureParametersUuid Measure parameters uuid
+     * @return Check result
+     */
+    boolean existMeasureParametersExceptOne(Date recordDate, String accountUuid, String measureParametersUuid);
+
+    /**
+     * Check - are measure parameters existing except one measure parameters entity
+     * @param recordDate Record date
+     * @param account Account
+     * @param measureParametersUuid Measure parameters uuid
+     * @return Check result
+     */
+    boolean existMeasureParametersExceptOne(Date recordDate, AccountEntity account, String measureParametersUuid);
+
 }

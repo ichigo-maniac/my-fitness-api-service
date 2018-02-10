@@ -79,5 +79,29 @@ public class MeasureParametersServiceTest extends MyFitnessAppApiServiceApplicat
                 calendar.getTime(), account), true);
     }
 
+    /**
+     * Method test - measureParametersService.existMeasureParametersExceptOne
+     */
+    @Test
+    public void existMeasureParametersExceptOneTest() {
+        AccountEntity account = accountService.getAccountByUUID(ACCOUNT_UUID);
+        GregorianCalendar calendar = new GregorianCalendar(2018,
+                Calendar.JANUARY, 15);
+        assertEquals(measureParametersService.existMeasureParametersExceptOne(
+                calendar.getTime(), account, MEASURE_PARAMETERS_UUID), false);
+    }
+
+    /**
+     * Method test - measureParametersService.existMeasureParametersExceptOne
+     */
+    @Test
+    public void existMeasureParametersExceptOneTest2() {
+        AccountEntity account = accountService.getAccountByUUID(ACCOUNT_UUID);
+        GregorianCalendar calendar = new GregorianCalendar(2018,
+                Calendar.JANUARY, 15);
+        assertEquals(measureParametersService.existMeasureParametersExceptOne(
+                calendar.getTime(), account, MEASURE_PARAMETERS_UUID), false);
+    }
+
 
 }

@@ -63,4 +63,34 @@ public interface MeasureParametersRepository extends CrudRepository<MeasureParam
     Long getMeasureParametersCountByDateAndAccount(@Param("recordDate") Date recordDate,
                                                    @Param("account") AccountEntity account);
 
+    /**
+     * Get measure parameters count by date and account UUID except one measure parameters entity
+     * @param recordDate Record date
+     * @param accountUuid Account UUID
+     * @param measureParametersUuid Measure parameters uuid
+     * @return Measure parameters count
+     */
+    @Query("SELECT COUNT(record) FROM " + MeasureParametersEntity.ENTITY_NAME + " as record " +
+            "WHERE compare_dates(record." + MeasureParametersEntity.RECORD_DATE + ", :recordDate) = true " +
+            "AND record." + MeasureParametersEntity.ACCOUNT + "." + AccountEntity.UUID + " = :accountUuid " +
+            "AND record." + MeasureParametersEntity.UUID + " <> :measureParametersUUID")
+    Long getMeasureParametersCountByDateAndAccountUUIDExceptOne(@Param("recordDate") Date recordDate,
+                                                                @Param("accountUuid") String accountUuid,
+                                                                @Param("measureParametersUUID") String measureParametersUuid);
+
+    /**
+     * Get measure parameters count by date and account except one measure parameters entity
+     * @param recordDate Record date
+     * @param account Account
+     * @param measureParametersUuid Measure parameters uuid
+     * @return Measure parameters count
+     */
+    @Query("SELECT COUNT(record) FROM " + MeasureParametersEntity.ENTITY_NAME + " as record " +
+            "WHERE compare_dates(record." + MeasureParametersEntity.RECORD_DATE + ", :recordDate) = true " +
+            "AND record." + MeasureParametersEntity.ACCOUNT + " = :account " +
+            "AND record." + MeasureParametersEntity.UUID + " <> :measureParametersUUID")
+    Long getMeasureParametersCountByDateAndAccountExceptOne(@Param("recordDate") Date recordDate,
+                                                            @Param("account") AccountEntity account,
+                                                            @Param("measureParametersUUID") String measureParametersUuid);
+
 }

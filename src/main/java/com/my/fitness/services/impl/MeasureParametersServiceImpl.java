@@ -64,4 +64,28 @@ public class MeasureParametersServiceImpl implements MeasureParametersService {
     public boolean existMeasureParameters(Date recordDate, AccountEntity account) {
         return measureParametersRepository.getMeasureParametersCountByDateAndAccount(recordDate, account) > 0;
     }
+
+    /**
+     * Check - are measure parameters existing except one measure parameters entity
+     * @param recordDate            Record date
+     * @param accountUuid           Account uuid
+     * @param measureParametersUuid Measure parameters uuid
+     * @return Check result
+     */
+    @Override
+    public boolean existMeasureParametersExceptOne(Date recordDate, String accountUuid, String measureParametersUuid) {
+        return measureParametersRepository.getMeasureParametersCountByDateAndAccountUUIDExceptOne(recordDate, accountUuid, measureParametersUuid) > 0;
+    }
+
+    /**
+     * Check - are measure parameters existing except one measure parameters entity
+     * @param recordDate            Record date
+     * @param account               Account
+     * @param measureParametersUuid Measure parameters uuid
+     * @return Check result
+     */
+    @Override
+    public boolean existMeasureParametersExceptOne(Date recordDate, AccountEntity account, String measureParametersUuid) {
+        return measureParametersRepository.getMeasureParametersCountByDateAndAccountExceptOne(recordDate, account, measureParametersUuid) > 0;
+    }
 }
