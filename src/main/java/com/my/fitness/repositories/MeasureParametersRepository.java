@@ -8,6 +8,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import javax.persistence.TemporalType;
 import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -92,5 +93,37 @@ public interface MeasureParametersRepository extends CrudRepository<MeasureParam
     Long getMeasureParametersCountByDateAndAccountExceptOne(@Param("recordDate") Date recordDate,
                                                             @Param("account") AccountEntity account,
                                                             @Param("measureParametersUUID") String measureParametersUuid);
+
+    /**
+     * Get measure parameters by date range and account UUID
+     * @param fromDate From date
+     * @param toDate Tp date
+     * @param accountUuid Account uuid
+     * @return List of measure parameters ordered by record date
+     */
+    @Query("SELECT record FROM " + MeasureParametersEntity.ENTITY_NAME + " as record " +
+            "WHERE record." + MeasureParametersEntity.RECORD_DATE + " <= :toDate " +
+            "AND record." + MeasureParametersEntity.RECORD_DATE + " >= :fromDate " +
+            "AND record." + MeasureParametersEntity.ACCOUNT + "." + AccountEntity.UUID + " = :accountUuid " +
+            "ORDER BY record." + MeasureParametersEntity.RECORD_DATE)
+    List<MeasureParametersEntity> getMeasureParametersByDateRange(@Param("fromDate") Date fromDate,
+                                                                  @Param("toDate") Date toDate,
+                                                                  @Param("accountUuid") String accountUuid);
+
+    /**
+     * Get measure parameters by date range and account UUID
+     * @param fromDate From date
+     * @param toDate Tp date
+     * @param account Account
+     * @return List of measure parameters ordered by record date
+     */
+    @Query("SELECT record FROM " + MeasureParametersEntity.ENTITY_NAME + " as record " +
+            "WHERE record." + MeasureParametersEntity.RECORD_DATE + " <= :toDate " +
+            "AND record." + MeasureParametersEntity.RECORD_DATE + " >= :fromDate " +
+            "AND record." + MeasureParametersEntity.ACCOUNT + " = :account " +
+            "ORDER BY record." + MeasureParametersEntity.RECORD_DATE)
+    List<MeasureParametersEntity> getMeasureParametersByDateRange(@Param("fromDate") Date fromDate,
+                                                                  @Param("toDate") Date toDate,
+                                                                  @Param("account") AccountEntity account);
 
 }

@@ -31,4 +31,30 @@ public class DateUtils {
         }
         return true;
     }
+
+    /**
+     * Trunc date down
+     * @param date Date
+     * @return Trunced date
+     */
+    public static Date truncDown(Date date) {
+        Date result = new Date(date.getTime());
+        result.setHours(0);
+        result.setMinutes(0);
+        result.setSeconds(0);
+        return result;
+    }
+
+    /**
+     * Trunc date up
+     * @param date Date
+     * @return Trunced date
+     */
+    public static Date truncUp(Date date) {
+        Date result = new Date(date.getTime());
+        result.setHours(23);
+        result.setMinutes(59);
+        result.setSeconds(59);
+        return result;
+    }
 }

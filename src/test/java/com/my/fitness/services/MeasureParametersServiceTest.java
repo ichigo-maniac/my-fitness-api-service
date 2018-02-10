@@ -5,8 +5,11 @@ import com.my.fitness.entities.AccountEntity;
 import com.my.fitness.entities.MeasureParametersEntity;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 /**
  * Measure parameters service tests
@@ -18,6 +21,11 @@ public class MeasureParametersServiceTest extends MyFitnessAppApiServiceApplicat
      */
     private static final String ACCOUNT_UUID = "4a9b636e-f065-11e6-9dac-836adef2f111";
     private static final String MEASURE_PARAMETERS_UUID = "4a9b636e-f065-11e6-9dac-836adef2f3a6";
+
+    private static final List<String> MEASURE_PARAMETERS_UUIDS_LIST = Arrays.asList(
+            "4a9b636e-f065-11e6-9dac-836adef2f3a6", "4a9b636e-f065-11e6-9dac-836adef21106",
+            "4a9b636e-f065-11e6-9dac-836adef55314"
+    );
 
     /**
      * Measure parameters service
@@ -101,6 +109,35 @@ public class MeasureParametersServiceTest extends MyFitnessAppApiServiceApplicat
                 Calendar.JANUARY, 15);
         assertEquals(measureParametersService.existMeasureParametersExceptOne(
                 calendar.getTime(), account, MEASURE_PARAMETERS_UUID), false);
+    }
+
+    /**
+     * Method test - measureParametersService.getMeasureParametersByDateRange
+     */
+    @Test
+    public void getMeasureParametersByDateRangeTest() {
+        GregorianCalendar fromDate = new GregorianCalendar(2018,
+                Calendar.JANUARY, 15);
+        GregorianCalendar toDate = new GregorianCalendar(2018,
+                Calendar.JANUARY, 19);
+        List<MeasureParametersEntity> measureParameters = measureParametersService.getMeasureParametersByDateRange(
+                fromDate.getTime(), toDate.getTime(), ACCOUNT_UUID);
+        assertOrderedUUIDListsEquals(getUUIDs(measureParameters), MEASURE_PARAMETERS_UUIDS_LIST);
+    }
+
+    /**
+     * Method test - measureParametersService.getMeasureParametersByDateRange
+     */
+    @Test
+    public void getMeasureParametersByDateRangeTest2() {
+        AccountEntity account = accountService.getAccountByUUID(ACCOUNT_UUID);
+        GregorianCalendar fromDate = new GregorianCalendar(2018,
+                Calendar.JANUARY, 15);
+        GregorianCalendar toDate = new GregorianCalendar(2018,
+                Calendar.JANUARY, 19);
+        List<MeasureParametersEntity> measureParameters = measureParametersService.getMeasureParametersByDateRange(
+                fromDate.getTime(), toDate.getTime(), account);
+        assertOrderedUUIDListsEquals(getUUIDs(measureParameters), MEASURE_PARAMETERS_UUIDS_LIST);
     }
 
 

@@ -4,10 +4,12 @@ import com.my.fitness.entities.AccountEntity;
 import com.my.fitness.entities.MeasureParametersEntity;
 import com.my.fitness.repositories.MeasureParametersRepository;
 import com.my.fitness.services.MeasureParametersService;
+import com.my.fitness.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Measure parameters service
@@ -87,5 +89,33 @@ public class MeasureParametersServiceImpl implements MeasureParametersService {
     @Override
     public boolean existMeasureParametersExceptOne(Date recordDate, AccountEntity account, String measureParametersUuid) {
         return measureParametersRepository.getMeasureParametersCountByDateAndAccountExceptOne(recordDate, account, measureParametersUuid) > 0;
+    }
+
+    /**
+     * Get measure parameters by date range and account UUID
+     * @param fromDate    From date
+     * @param toDate      Tp date
+     * @param accountUuid Account uuid
+     * @return List of measure parameters ordered by record date
+     */
+    @Override
+    public List<MeasureParametersEntity> getMeasureParametersByDateRange(Date fromDate, Date toDate, String accountUuid) {
+        return measureParametersRepository.getMeasureParametersByDateRange(
+                DateUtils.truncDown(fromDate), DateUtils.truncUp(toDate), accountUuid
+        );
+    }
+
+    /**
+     * Get measure parameters by date range and account UUID
+     * @param fromDate From date
+     * @param toDate   Tp date
+     * @param account  Account
+     * @return List of measure parameters ordered by record date
+     */
+    @Override
+    public List<MeasureParametersEntity> getMeasureParametersByDateRange(Date fromDate, Date toDate, AccountEntity account) {
+        return measureParametersRepository.getMeasureParametersByDateRange(
+                DateUtils.truncDown(fromDate), DateUtils.truncUp(toDate), account
+        );
     }
 }

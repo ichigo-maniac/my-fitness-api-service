@@ -4,6 +4,7 @@ import com.my.fitness.entities.AccountEntity;
 import com.my.fitness.entities.MeasureParametersEntity;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Measure parameters service interface
@@ -59,5 +60,23 @@ public interface MeasureParametersService {
      * @return Check result
      */
     boolean existMeasureParametersExceptOne(Date recordDate, AccountEntity account, String measureParametersUuid);
+
+    /**
+     * Get measure parameters by date range and account UUID
+     * @param fromDate From date
+     * @param toDate Tp date
+     * @param accountUuid Account uuid
+     * @return List of measure parameters ordered by record date
+     */
+    List<MeasureParametersEntity> getMeasureParametersByDateRange(Date fromDate, Date toDate, String accountUuid);
+
+    /**
+     * Get measure parameters by date range and account UUID
+     * @param fromDate From date
+     * @param toDate Tp date
+     * @param account Account
+     * @return List of measure parameters ordered by record date
+     */
+    List<MeasureParametersEntity> getMeasureParametersByDateRange(Date fromDate, Date toDate, AccountEntity account);
 
 }
