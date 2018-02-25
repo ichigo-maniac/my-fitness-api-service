@@ -44,6 +44,30 @@ public class AccountEntity extends AbstractEntity {
     public static final String WEIGHT_UNIT = "weightUnit";
 
     /**
+     * Facebook id
+     */
+    @Basic(optional = true)
+    @Column(name = "facebook_id")
+    private String facebookId;
+    public static final String FACEBOOK_ID = "facebookId";
+
+    /**
+     * Vk.com id
+     */
+    @Basic(optional = true)
+    @Column(name = "vk_id")
+    private String vkId;
+    public static final String VK_ID = "vkId";
+
+    /**
+     * Twitter id
+     */
+    @Basic(optional = true)
+    @Column(name = "twitter_id")
+    private String twitterId;
+    public static final String TWITTER_ID = "twitterId";
+
+    /**
      * Get measure parameters
      * @return Measure parameters
      */
@@ -89,5 +113,53 @@ public class AccountEntity extends AbstractEntity {
      */
     public void setWeightUnit(WeightUnit weightUnit) {
         this.weightUnit = weightUnit;
+    }
+
+    /**
+     * Get facebook id
+     * @return Facebook id
+     */
+    public String getFacebookId() {
+        return facebookId;
+    }
+
+    /**
+     * Set facebook id
+     * @param facebookId Facebook id
+     */
+    public void setFacebookId(String facebookId) {
+        this.facebookId = facebookId;
+    }
+
+    /**
+     * Get vk.com id
+     * @return Vk.com id
+     */
+    public String getVkId() {
+        return vkId;
+    }
+
+    /**
+     * Set vk.com id
+     * @param vkId Vk.com id
+     */
+    public void setVkId(String vkId) {
+        this.vkId = vkId;
+    }
+
+    /**
+     * Get twitter id
+     * @return Twitter id
+     */
+    public String getTwitterId() {
+        return twitterId;
+    }
+
+    /**
+     * Set twitter id
+     * @param twitterId Twitter id
+     */
+    public void setTwitterId(String twitterId) {
+        this.twitterId = twitterId;
     }
 }
