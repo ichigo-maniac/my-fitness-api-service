@@ -9,6 +9,15 @@ import com.my.fitness.enums.SocialNetworkType;
 public interface AccountService {
 
     /**
+     * Get or create an account
+     * @param socialNetworkId Social network id
+     * @param socialNetworkType Social network type
+     * @param name Account name
+     * @return Old or created account
+     */
+    AccountEntity getOrCreateAccount(String socialNetworkId, SocialNetworkType socialNetworkType, String name);
+
+    /**
      * Get account by UUID
      * @param accountUUID Account UUID
      * @return Account

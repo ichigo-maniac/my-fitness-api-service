@@ -1,7 +1,9 @@
 package com.my.fitness.services.impl;
 
 import com.my.fitness.entities.AccountEntity;
+import com.my.fitness.enums.LengthUnit;
 import com.my.fitness.enums.SocialNetworkType;
+import com.my.fitness.enums.WeightUnit;
 import com.my.fitness.repositories.AccountRepository;
 import com.my.fitness.services.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,38 @@ public class AccountServiceImpl implements AccountService {
      */
     @Autowired
     private AccountRepository accountRepository;
+
+    /**
+     * Get or create an account
+     * @param socialNetworkId   Social network id
+     * @param socialNetworkType Social network type
+     * @param name              Account name
+     * @return Old or created account
+     */
+    @Override
+    public AccountEntity getOrCreateAccount(String socialNetworkId, SocialNetworkType socialNetworkType, String name) {
+        AccountEntity account = getAccountBySocialNetworkId(socialNetworkId, socialNetworkType);
+        if (account == null) {
+            AccountEntity newAccount = new AccountEntity();
+            newAccount.setName(name);
+            if (socialNetworkType == SocialNetworkType.FACEBOOK) {
+                newAccount.setFacebookId(socialNetworkId);
+            }
+            if (socialNetworkType == SocialNetworkType.TWITTER) {
+                newAccount.setTwitterId(socialNetworkId);
+            }
+            if (socialNetworkType == SocialNetworkType.VK_COM) {
+                newAccount.setVkId(socialNetworkId);
+            }
+            /** Units */
+            newAccount.setLengthUnit(LengthUnit.CENTIMETER);
+            newAccount.setWeightUnit(WeightUnit.KILOGRAM);
+            accountRepository.save(newAccount);
+            return newAccount;
+        } else {
+            return account;
+        }
+    }
 
     /**
      * Get account by UUID
