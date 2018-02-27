@@ -39,5 +39,8 @@ public class AccountEntityConverter extends AbstractEntityConverter<AccountEntit
             return;
         }
         super.fillIn(source, result, options);
+        result.setName(source.getName());
+        result.setWeightUnit(source.getWeightUnit());
+        result.setLengthUnit(source.getLengthUnit());
     }
 }
