@@ -19,6 +19,13 @@ public class AccountEntity extends AbstractEntity {
     public static final String ENTITY_NAME = "Account";
 
     /**
+     * Name
+     */
+    @Basic(optional = false)
+    private String name;
+    public static final String NAME = "name";
+
+    /**
      * Measure parameters
      */
     @OneToMany(fetch = FetchType.LAZY, mappedBy = MeasureParametersEntity.ACCOUNT, cascade = CascadeType.ALL)
@@ -66,6 +73,22 @@ public class AccountEntity extends AbstractEntity {
     @Column(name = "twitter_id")
     private String twitterId;
     public static final String TWITTER_ID = "twitterId";
+
+    /**
+     * Get name
+     * @return Name
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * Set name
+     * @param name Name
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
 
     /**
      * Get measure parameters

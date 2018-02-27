@@ -2,6 +2,7 @@ CREATE TABLE ACCOUNTS(
   uuid CHARACTER VARYING(36) NOT NULL PRIMARY KEY,
   creation_time TIMESTAMP NOT NULL,
   modification_time TIMESTAMP NOT NULL,
+  name CHARACTER VARYING(255) NOT NULL,
   length_unit CHARACTER VARYING(255) NOT NULL,
   weight_unit CHARACTER VARYING(255) NOT NULL,
   facebook_id CHARACTER VARYING(255),
@@ -19,14 +20,14 @@ CREATE TABLE MEASURE_PARAMETERS(
   weight_unit CHARACTER VARYING(255) NOT NULL
 );
 
-INSERT INTO ACCOUNTS(uuid, creation_time, modification_time, length_unit, weight_unit, facebook_id) VALUES (
+INSERT INTO ACCOUNTS(uuid, creation_time, modification_time, name, length_unit, weight_unit, facebook_id) VALUES (
   '4a9b636e-f065-11e6-9dac-836adef2f111', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP,
-  'METER', 'KILOGRAM', 'dummy_facebook_id'
+  'First account', 'METER', 'KILOGRAM', 'dummy_facebook_id'
 );
 
-INSERT INTO ACCOUNTS(uuid, creation_time, modification_time, length_unit, weight_unit, vk_id, twitter_id) VALUES (
+INSERT INTO ACCOUNTS(uuid, creation_time, modification_time, name, length_unit, weight_unit, vk_id, twitter_id) VALUES (
   '4a9b636e-f065-11e6-9dac-836adef00000', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP,
-  'METER', 'KILOGRAM', 'dummy_vk_id', 'dummy_twitter_id'
+  'Second account', 'METER', 'KILOGRAM', 'dummy_vk_id', 'dummy_twitter_id'
 );
 
 INSERT INTO MEASURE_PARAMETERS(uuid, creation_time, modification_time, account_uuid, weight_value, record_date, weight_unit) VALUES (
