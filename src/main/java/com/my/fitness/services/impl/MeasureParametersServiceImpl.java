@@ -1,5 +1,6 @@
 package com.my.fitness.services.impl;
 
+import com.my.fitness.controllers.dto.SaveMeasureParameterDto;
 import com.my.fitness.entities.AccountEntity;
 import com.my.fitness.entities.MeasureParametersEntity;
 import com.my.fitness.repositories.MeasureParametersRepository;
@@ -22,6 +23,25 @@ public class MeasureParametersServiceImpl implements MeasureParametersService {
      */
     @Autowired
     private MeasureParametersRepository measureParametersRepository;
+
+    /**
+     * Save or update measure parameter
+     * @param account                 Account entity
+     * @param saveMeasureParameterDto Save measure parameter data transfer object
+     * @return Saved measure parameter
+     */
+    @Override
+    public MeasureParametersEntity saveOrUpdateMeasureParameter(AccountEntity account, SaveMeasureParameterDto saveMeasureParameterDto) {
+        MeasureParametersEntity measureParameters = getMeasureParametersByDateAndAccount(saveMeasureParameterDto.getRecordDate(), account);
+        if (measureParameters == null) {
+            measureParameters = new MeasureParametersEntity();
+            measureParameters.setAccount(account);
+            measureParameters.setRecordDate(saveMeasureParameterDto.getRecordDate());
+        }
+        measureParameters.setWeightUnit(saveMeasureParameterDto.getWeightUnit());
+        measureParameters.setWeightValue(saveMeasureParameterDto.getWeightValue());
+        return measureParametersRepository.save(measureParameters);
+    }
 
     /**
      * Get measure parameters by date and account UUID

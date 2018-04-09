@@ -1,8 +1,10 @@
 package com.my.fitness.services;
 
 import com.my.fitness.MyFitnessAppApiServiceApplicationTests;
+import com.my.fitness.controllers.dto.SaveMeasureParameterDto;
 import com.my.fitness.entities.AccountEntity;
 import com.my.fitness.entities.MeasureParametersEntity;
+import com.my.fitness.enums.WeightUnit;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -38,6 +40,55 @@ public class MeasureParametersServiceTest extends MyFitnessAppApiServiceApplicat
      */
     @Autowired
     private AccountService accountService;
+
+    /**
+     * Method test - measureParametersService.saveOrUpdateMeasureParameterTest
+     */
+    @Test
+    public void saveOrUpdateMeasureParameterTest() {
+        AccountEntity account = accountService.getAccountByUUID(ACCOUNT_UUID);
+        /** Create a new record */
+        SaveMeasureParameterDto saveMeasureParameterDto = new SaveMeasureParameterDto();
+        GregorianCalendar calendar = new GregorianCalendar(2018,
+                Calendar.JANUARY, 16);
+        saveMeasureParameterDto.setRecordDate(calendar.getTime());
+        saveMeasureParameterDto.setWeightUnit(WeightUnit.KILOGRAM);
+        saveMeasureParameterDto.setWeightValue(105.5);
+        MeasureParametersEntity measureParametersEntity = measureParametersService.saveOrUpdateMeasureParameter(account, saveMeasureParameterDto);
+        assertTrue(measureParametersEntity.getWeightValue() == 105.5 && measureParametersEntity.getWeightUnit() == WeightUnit.KILOGRAM);
+        /** Update record */
+        saveMeasureParameterDto.setWeightUnit(WeightUnit.POUND);
+        saveMeasureParameterDto.setWeightValue(50.2);
+        MeasureParametersEntity measureParametersEntity2 = measureParametersService.saveOrUpdateMeasureParameter(account, saveMeasureParameterDto);
+        assertTrue(measureParametersEntity2.getWeightValue() == 50.2 && measureParametersEntity2.getWeightUnit() == WeightUnit.POUND);
+        assertTrue(measureParametersEntity.getUuid().equals(measureParametersEntity2.getUuid()));
+    }
+
+    /**
+     * Method test - measureParametersService.saveOrUpdateMeasureParameterTest
+     */
+    @Test
+    public void saveOrUpdateMeasureParameterTest2() {
+        AccountEntity account = accountService.getAccountByUUID(ACCOUNT_UUID);
+        /** Create a new record */
+        SaveMeasureParameterDto saveMeasureParameterDto = new SaveMeasureParameterDto();
+        GregorianCalendar calendar = new GregorianCalendar(2018,
+                Calendar.JANUARY, 11);
+        saveMeasureParameterDto.setRecordDate(calendar.getTime());
+        saveMeasureParameterDto.setWeightUnit(WeightUnit.KILOGRAM);
+        saveMeasureParameterDto.setWeightValue(105.5);
+        MeasureParametersEntity measureParametersEntity = measureParametersService.saveOrUpdateMeasureParameter(account, saveMeasureParameterDto);
+        assertTrue(measureParametersEntity.getWeightValue() == 105.5 && measureParametersEntity.getWeightUnit() == WeightUnit.KILOGRAM);
+        /** Update record */
+        GregorianCalendar calendar2 = new GregorianCalendar(2018,
+                Calendar.JANUARY, 12);
+        saveMeasureParameterDto.setRecordDate(calendar2.getTime());
+        saveMeasureParameterDto.setWeightUnit(WeightUnit.POUND);
+        saveMeasureParameterDto.setWeightValue(50.2);
+        MeasureParametersEntity measureParametersEntity2 = measureParametersService.saveOrUpdateMeasureParameter(account, saveMeasureParameterDto);
+        assertTrue(measureParametersEntity2.getWeightValue() == 50.2 && measureParametersEntity2.getWeightUnit() == WeightUnit.POUND);
+        assertFalse(measureParametersEntity.getUuid().equals(measureParametersEntity2.getUuid()));
+    }
 
     /**
      * Method test - measureParametersService.getMeasureParametersByDateAndAccountUUID
