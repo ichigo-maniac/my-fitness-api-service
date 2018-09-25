@@ -1,4 +1,4 @@
-package com.my.fitness.controllers;
+package com.my.fitness.api;
 
 import com.my.fitness.converters.impl.MeasureParametersEntityConverter;
 import com.my.fitness.dto.MeasureParametersEntityDto;
@@ -12,11 +12,11 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Measure parameters controller
+ * Measure parameters api controller
  */
 @RestController
 @RequestMapping("/measure_parameters")
-public class MeasureParametersController {
+public class MeasureParametersApi {
 
     /**
      * Measure parameters service

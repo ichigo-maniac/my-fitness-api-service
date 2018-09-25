@@ -1,6 +1,6 @@
 package com.my.fitness.services.impl;
 
-import com.my.fitness.controllers.dto.SaveMeasureParameterDto;
+import com.my.fitness.api.models.CreateMeasureParameterInput;
 import com.my.fitness.entities.AccountEntity;
 import com.my.fitness.entities.MeasureParametersEntity;
 import com.my.fitness.repositories.MeasureParametersRepository;
@@ -25,21 +25,21 @@ public class MeasureParametersServiceImpl implements MeasureParametersService {
     private MeasureParametersRepository measureParametersRepository;
 
     /**
-     * Save or update measure parameter
+     * Create or update measure parameter
      * @param account                 Account entity
-     * @param saveMeasureParameterDto Save measure parameter data transfer object
+     * @param createMeasureParameterInput Create measure parameter data transfer object
      * @return Saved measure parameter
      */
     @Override
-    public MeasureParametersEntity saveOrUpdateMeasureParameter(AccountEntity account, SaveMeasureParameterDto saveMeasureParameterDto) {
-        MeasureParametersEntity measureParameters = getMeasureParametersByDateAndAccount(saveMeasureParameterDto.getRecordDate(), account);
+    public MeasureParametersEntity createOrUpdateMeasureParameter(AccountEntity account, CreateMeasureParameterInput createMeasureParameterInput) {
+        MeasureParametersEntity measureParameters = getMeasureParametersByDateAndAccount(createMeasureParameterInput.getRecordDate(), account);
         if (measureParameters == null) {
             measureParameters = new MeasureParametersEntity();
             measureParameters.setAccount(account);
-            measureParameters.setRecordDate(saveMeasureParameterDto.getRecordDate());
+            measureParameters.setRecordDate(createMeasureParameterInput.getRecordDate());
         }
-        measureParameters.setWeightUnit(saveMeasureParameterDto.getWeightUnit());
-        measureParameters.setWeightValue(saveMeasureParameterDto.getWeightValue());
+        measureParameters.setWeightUnit(createMeasureParameterInput.getWeightUnit());
+        measureParameters.setWeightValue(createMeasureParameterInput.getWeightValue());
         return measureParametersRepository.save(measureParameters);
     }
 

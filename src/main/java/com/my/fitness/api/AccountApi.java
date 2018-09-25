@@ -1,6 +1,6 @@
-package com.my.fitness.controllers;
+package com.my.fitness.api;
 
-import com.my.fitness.controllers.dto.CreateAccountRequest;
+import com.my.fitness.api.models.CreateAccountRequestInput;
 import com.my.fitness.converters.impl.AccountEntityConverter;
 import com.my.fitness.dto.AccountEntityDto;
 import com.my.fitness.entities.AccountEntity;
@@ -10,11 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * Account controller
+ * Account api controller
  */
 @RestController
 @RequestMapping("/account")
-public class AccountController {
+public class AccountApi {
 
     /**
      * Account service
@@ -33,7 +33,7 @@ public class AccountController {
      * @param accountUUID Account uuid
      * @return Account
      */
-    @RequestMapping(method = RequestMethod.GET, value = "/get_account/{accountUUID}")
+    @GetMapping(value = "/get_account/{accountUUID}")
     public AccountEntityDto getAccountByUUID(@PathVariable String accountUUID) {
         AccountEntity account = accountService.getAccountByUUID(accountUUID);
         return accountEntityConverter.convert(account);
@@ -44,8 +44,8 @@ public class AccountController {
      * @param createAccountRequest Create account request
      * @return Account info
      */
-    @RequestMapping(method = RequestMethod.POST, value = "/get_or_create_account")
-    public AccountEntityDto getOrCreateAccount(@RequestBody CreateAccountRequest createAccountRequest) {
+    @PostMapping(value = "/get_or_create_account")
+    public AccountEntityDto getOrCreateAccount(@RequestBody CreateAccountRequestInput createAccountRequest) {
         AccountEntity account = accountService.getOrCreateAccount(createAccountRequest.getSocialNetworkId(),
                 SocialNetworkType.valueOf(createAccountRequest.getSocialNetworkType()),
                 createAccountRequest.getName());

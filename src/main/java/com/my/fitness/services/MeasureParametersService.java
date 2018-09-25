@@ -1,6 +1,6 @@
 package com.my.fitness.services;
 
-import com.my.fitness.controllers.dto.SaveMeasureParameterDto;
+import com.my.fitness.api.models.CreateMeasureParameterInput;
 import com.my.fitness.entities.AccountEntity;
 import com.my.fitness.entities.MeasureParametersEntity;
 
@@ -13,12 +13,12 @@ import java.util.List;
 public interface MeasureParametersService {
 
     /**
-     * Save or update measure parameter
+     * Create or update measure parameter
      * @param account Account entity
-     * @param saveMeasureParameterDto Save measure parameter data transfer object
+     * @param createMeasureParameterInput Create measure parameter data transfer object
      * @return Saved measure parameter
      */
-    MeasureParametersEntity saveOrUpdateMeasureParameter(AccountEntity account, SaveMeasureParameterDto saveMeasureParameterDto);
+    MeasureParametersEntity createOrUpdateMeasureParameter(AccountEntity account, CreateMeasureParameterInput createMeasureParameterInput);
 
     /**
      * Get measure parameters by date and account UUID
