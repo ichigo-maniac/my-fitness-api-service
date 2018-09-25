@@ -2,6 +2,7 @@ package com.my.fitness.repositories;
 
 import com.my.fitness.entities.AccountEntity;
 import com.my.fitness.entities.MeasureParametersEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.Temporal;
 import org.springframework.data.repository.CrudRepository;
@@ -14,7 +15,7 @@ import java.util.List;
 /**
  * Measure parameters repository
  */
-public interface MeasureParametersRepository extends CrudRepository<MeasureParametersEntity, String> {
+public interface MeasureParametersRepository extends JpaRepository<MeasureParametersEntity, String> {
 
     /**
      * Get measure parameters by date and account UUID

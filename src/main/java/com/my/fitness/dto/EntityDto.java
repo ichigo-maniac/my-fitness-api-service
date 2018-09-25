@@ -1,11 +1,16 @@
 package com.my.fitness.dto;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Entity data transfer object
  */
+@Getter
+@Setter
 public class EntityDto implements Serializable {
 
     private static final long serialVersionUID = -7398836737277111538L;
@@ -24,58 +29,6 @@ public class EntityDto implements Serializable {
      * Modification time
      */
     private Date modificationTime;
-
-    /**
-     * Sey uuid
-     * @param uuid Uuid string
-     */
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
-    }
-
-    /**
-     * Get uuid
-     * @return Uuid string
-     */
-    public String getUuid() {
-        return uuid;
-    }
-
-    /**
-     * Get creation time
-     *
-     * @return Creation time
-     */
-    public Date getCreationTime() {
-        return creationTime;
-    }
-
-    /**
-     * Set creation time
-     *
-     * @param creationTime Creation time
-     */
-    public void setCreationTime(Date creationTime) {
-        this.creationTime = creationTime;
-    }
-
-    /**
-     * Get modification time
-     *
-     * @return Modification time
-     */
-    public Date getModificationTime() {
-        return modificationTime;
-    }
-
-    /**
-     * Set modification time
-     *
-     * @param modificationTime Modification time
-     */
-    public void setModificationTime(Date modificationTime) {
-        this.modificationTime = modificationTime;
-    }
 
     /**
      * Get hash code
